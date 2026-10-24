@@ -9,6 +9,7 @@ The wallet in the defaults is a public payout address. This project never asks f
 - Linux amd64 image built from pinned `ubuntu:24.04` and the official BzMiner v100.50 release archive (SHA-256 verified). The upstream `bzminer/bzminer` image was not pullable from the build environment (Docker Hub 404, GHCR 401), so this repository builds an equivalent runtime from the official binary.
 - Unit tests, image checks, no-GPU failure path, fake-miner integration, restart/backoff, graceful SIGTERM, and a local real-GPU smoke all pass on the development host.
 - Real-GPU smoke on 2× NVIDIA GRID P4-8Q (8 GiB): two CUDA devices detected, pool authorization and connection succeeded, `/readyz` returned ready, and BzMiner reported 0 accepted shares and 0 hashrate at the ~10-second observation point. That is not evidence of earnings; Pearl on Pascal is slow and shares are difficulty-dependent.
+- **Published image:** `ghcr.io/timmy-time/salad-bzminer-worker:1.0.0` (also `:1.0` and `:sha-79b61b1`), digest `sha256:737b0b1fb26f2296b3a42f4c30cf861cde666dc41b0c3197be7e77e8fc783be6`. Anonymous pull verified.
 - No paid SaladCloud replicas were deployed. See [docs/SALAD_DEPLOYMENT.md](docs/SALAD_DEPLOYMENT.md) before deploying.
 
 ## Architecture
@@ -136,7 +137,7 @@ docker build --build-arg VERSION=1.0.0 \
   --tag ghcr.io/timmy-time/salad-bzminer-worker:1.0.0 .
 ```
 
-`.github/workflows/docker-publish.yml` publishes to `ghcr.io/timmy-time/salad-bzminer-worker` only on version tags or an explicit manual run. It uses `GITHUB_TOKEN` with `contents: read` and `packages: write`. No image has been pushed by this repository yet.
+`.github/workflows/docker-publish.yml` publishes to `ghcr.io/timmy-time/salad-bzminer-worker` on version tags or an explicit manual run. It uses `GITHUB_TOKEN` with `contents: read` and `packages: write`. The v1.0.0 tag was published successfully.
 
 Docker Hub is optional and manual, after an interactive login:
 
