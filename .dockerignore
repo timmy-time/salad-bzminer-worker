@@ -1,0 +1,12 @@
+.git
+.github
+.gitignore
+.env
+.env.*
+!.env.example
+bin
+coverage.out
+docs
+tests
+*.md
+local
